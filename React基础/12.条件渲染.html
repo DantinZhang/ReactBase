@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="./libs/react.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="./libs/react-dom.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="./libs/babel.js"></script>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    isLogin: false,
+                    friend: {
+                        name: 'zzy',
+                        description: '我很帅'
+                    }
+                }
+            }
+
+            render() {
+                let { isLogin,friend } = this.state;
+                let dom = null;
+                if (isLogin) {
+                    dom = <div>登录成功！</div>
+                } else {
+                    dom = <button>重新登录</button>
+                }
+
+                return (
+                    <div>
+                        {/*1.if-else条件渲染*/}
+                        <h2>{dom}</h2>
+                        {/*2.三元运算符*/ }
+                        <h2>{isLogin ? '登录成功！' : <button>重新登录</button>}</h2>
+                        {/*3.逻辑中断,如果后台没有请求到数据就不执行后面的显示*/ }
+                        <h2>{friend && `我叫${friend.name},${friend.description}`}</h2>
+                    </div>
+                )
+            }
+        }
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

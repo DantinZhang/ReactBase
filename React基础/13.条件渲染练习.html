@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染练习</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="./libs/react.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="./libs/react-dom.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="./libs/babel.js"></script>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    isShow: true,
+                }
+            }
+
+            showDom() {
+                console.log(this.state.isShow)
+                this.setState({
+                    isShow: !this.state.isShow
+                })
+            }
+
+            render() {
+                let { isShow } = this.state;
+
+                let message = null;
+                if (isShow) {
+                    message = 'Dj Drop the beat';
+                }
+
+                return (
+                    <div>
+                        <button onClick={() => this.showDom()}>点击显示隐藏</button>
+                        {/*1.用if-else实现*/}
+                        <h2>{message}</h2>
+                        {/*2.用三元运算符实现*/}
+                        <h2>{isShow ? 'Dj drop the beat' : ''}</h2>
+                        {/*3.用逻辑中断*/}
+                        <h2>{isShow && 'Dj drop the beat'}</h2>
+
+                        {/*模拟v-show的实现*/}
+                        <h2 style={{ display: isShow ? 'block' : 'none' }}>模拟v-show</h2>
+                    </div>
+                )
+            }
+        }
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

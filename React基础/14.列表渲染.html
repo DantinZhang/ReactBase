@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="./libs/react.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="./libs/react-dom.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="./libs/babel.js"></script>
+    <style>
+        .active {
+            border: 1px solid blue;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    student: [
+                        { id: 1, name: 'zzy', age: 18, sex: '男' },
+                        { id: 2, name: 'ht', age: 16, sex: '女' },
+                        { id: 3, name: '张学良', age: 118, sex: '男' },
+                        { id: 4, name: '杨虎城', age: 18, sex: '女' },
+                    ]
+                }
+            }
+
+            render() {
+                let { student } = this.state;
+                return (
+                    <div>
+                        {student.filter(item => item.age < 20).slice(0,2).map(item => {
+                            return (
+                            <div className='active' key={item.id}>
+                                <h5>姓名：{item.name}</h5>
+                                <h5>年龄：{item.age}</h5>
+                                <h5>性别：{item.sex}</h5>
+                            </div>
+                            )
+                        })}
+                    </div>
+                )
+            }
+        }
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

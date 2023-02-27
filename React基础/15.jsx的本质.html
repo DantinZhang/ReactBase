@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx的本质</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="./libs/react.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="./libs/react-dom.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="./libs/babel.js"></script>
+    <style>
+        .active {
+            border: 1px solid blue;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root1"></div>
+    <div id="root2"></div>
+    <script type="text/babel">
+        const root1 = ReactDOM.createRoot(document.querySelector('#root1'));
+        class App1 extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    count: 0,
+                }
+            }
+
+            render() {
+                let { count } = this.state;
+                return (
+                    <div>
+                        <h2>{count}</h2>
+                        <ul className='active'>
+                            <li>我是li1</li>
+                            <li>我是li2</li>
+                            <li>我是li3</li>
+                        </ul>
+                        <button>按钮</button>
+                    </div>
+                )
+            }
+        }
+        root1.render(<App1 />);
+    </script>
+
+    <script>
+        const root2 = ReactDOM.createRoot(document.querySelector('#root2'));
+        class App2 extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    count: 0,
+                }
+            }
+
+            render() {
+                let { count } = this.state;
+                let element = (
+                     /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/
+
+                    React.createElement("h2", null, count),
+
+                    /*#__PURE__*/React.createElement("ul", { className: "active" },
+                    /*#__PURE__*/React.createElement("li", null, "\u6211\u662Fli1"),
+                    /*#__PURE__*/React.createElement("li", null, "\u6211\u662Fli2")),
+
+                    /*#__PURE__*/React.createElement("button", null, "\u6309\u94AE"))
+                )
+                console.log(element)
+                return element
+            }
+        }
+        root2.render(React.createElement(App2,null));
+
+    </script>
+</body>
+
+</html>

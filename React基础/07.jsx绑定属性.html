@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx绑定属性</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="./libs/react.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="./libs/react-dom.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="./libs/babel.js"></script>
+    <style>
+        .zzy {
+            color: red;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    imgUrl: "http://p2.music.126.net/L8IDEWMk_6vyT0asSkPgXw==/109951163990535633.jpg",
+                    link: 'http://www.baidu.com',
+                    active: true,
+                    msg: '动态绑定类'
+                }
+            }
+
+            render() {
+                let { imgUrl, link } = this.state;
+                let { msg, active } = this.state;
+                //动态绑定类名方式一
+                let className = `zzy ${active ? 'active' : ''}`;
+                //动态绑定类名方式二
+                let classArr = ['zzy','ht'];
+                if(active) classArr.push('active');
+
+                return (
+                    <div>
+                        {/*1.绑定普通属性*/}
+                        <img src={imgUrl} />
+                        <a href={link}>百度</a>
+
+                        <h2 className='zzy'>{msg}</h2>
+                        <h2 className={className}>{msg}</h2>
+                        {/*2.绑定class*/}
+                        {/*属性动态绑定数组，转为字符串自动逗号隔开*/}
+                        {/*展示部分动态绑定数组，转为字符串自动去掉逗号*/}
+                        <h2 className={classArr.join(' ')}>{msg}</h2>
+                        {/*3.绑定style*/}
+                        <h2 style={{color:'blue',fontSize:'36px'}}>绑定style</h2>
+                    </div>
+                )
+            }
+        }
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

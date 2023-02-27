@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习传参</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="./libs/react.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="./libs/react-dom.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="./libs/babel.js"></script>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    movies: ['星际争霸', '魔兽世界', '流浪地球', '奥里给'],
+                    currentMovie: '',
+                }
+            }
+
+            changeColor(e, movie) {
+                this.setState({
+                    currentMovie: movie,
+                })
+            }
+
+            render() {
+                let { movies, currentMovie } = this.state;
+                return (
+                    <div>
+                        <ul>
+                            {movies.map(movie => {
+                                return (<li
+                                    className={currentMovie == movie ? 'active' : ''}
+                                    onClick={(e) => this.changeColor(e, movie)}>
+                                    {movie}
+                                </li>)
+                            })}
+                        </ul>
+                    </div>
+                )
+            }
+        }
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

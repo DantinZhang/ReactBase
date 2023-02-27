@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影案例</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    movies: ['星际争霸', '魔兽世界', '流浪地球', '奥里给']
+                }
+            }
+
+            render() {
+                //1.遍历展示数组的方法1
+                // let lis = [];
+                // for(let i = 0; i < this.state.movies.length; i++) {
+                //     let movie = this.state.movies[i];
+                //     let li = <li>{movie}</li>;
+                //     lis.push(li);
+                // }
+
+                //2.方法2:map遍历,改变每个元素为li
+                let lis = this.state.movies.map(el => <li>{el}</li>)
+                return (
+                    <div>
+                        <h2>电影名字</h2>
+                        <ul>
+                            {lis}
+                        </ul>
+                    </div>      
+                )
+            }
+        }
+
+        let root = ReactDOM.createRoot(document.querySelector('#root'));
+        root.render(<App/>);
+    </script>
+</body>
+
+</html>

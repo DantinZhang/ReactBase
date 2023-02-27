@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx事件对象和传参</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="./libs/react.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="./libs/react-dom.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="./libs/babel.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    count: 0,
+                }
+            }
+
+            btnClick(e, name, age) {
+                console.log('e', e);
+                console.log('name', name);
+                console.log('age', age);
+            }
+
+            render() {
+                let { count } = this.state;
+                return (
+                    <div>
+                        <h2>{count}</h2>
+                        <button onClick={this.btnClick.bind(this)}>点击奥里给</button>
+                        <button onClick={(e) => this.btnClick(e)}>箭头函数</button><br />
+                        <button onClick={this.btnClick.bind(this, 'zzy', 18)}>bind传参</button>
+                        <button onClick={(e) => this.btnClick(e, 'zzy', 18)}>箭头函数传参</button>
+                    </div>
+                )
+            }
+        }
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx事件绑定</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="./libs/react.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="./libs/react-dom.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="./libs/babel.js"></script>
+</head>
+
+<body>
+    <script>
+        const obj = {
+            foo: () => {
+                console.log(this);
+            }
+        }
+        let fun = obj.foo
+        fun(); //window
+    </script>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    count: 0,
+                }
+            }
+
+            fun1() {
+                console.log(this);
+            }
+
+            fun2 = () => {
+                console.log(this);
+            }
+
+            fun3() {
+                console.log(this);
+            }
+
+            render() {
+                let { count } = this.state;
+                return (
+                    <div>
+                        {/*1.显式绑定this*/}
+                        <h2 onClick={this.fun1.bind(this)}>fun1</h2>
+                        {/*2.利用箭头函数找到this*/}
+                        <h2 onClick={this.fun2}>fun2</h2>
+                        {/*3.直接写箭头函数，箭头函数调用回调*/}
+                        <h2 onClick={() => console.log(this)}>fun3</h2>
+                        <h2 onClick={() => this.fun3()}>fun4</h2>
+                    </div>
+                )
+            }
+        }
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

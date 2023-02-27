@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识React</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        //渲染Hello World
+        //1.定义一个变量来存储信息
+        let message = 'Hello Word!';
+
+        //React18之前使用ReactDOM.render
+        //ReactDOM.render(<h2>Hello World</h2>, document.querySelector('#root'));
+        //React18之后
+        //2.定义容器
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
+        //3.先调用一次渲染函数,渲染页面
+        rootRender();
+
+        //下面是预先定义好的函数
+        //函数一：渲染函数
+        function rootRender() {
+            root.render(
+                <div>
+                    <h2>{message}</h2>
+                    <button onClick={changeMsg}>点击修改信息</button>
+                </div>
+            );
+        }
+
+        //函数二：按钮的点击事件触发函数
+        function changeMsg() {
+            message = 'Hello React!';
+            console.log(message); //函数调用了,但是没有重新渲染
+            rootRender(); //修改完后重新渲染页面
+        }
+    </script>
+</body>
+
+</html>

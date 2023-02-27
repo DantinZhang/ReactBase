@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车案例</title>
+    <!-- 引入三个依赖的库 -->
+    <!-- 1.引入react核心代码库 -->
+    <script crossorigin src="./libs/react.js"></script>
+    <!-- 2.引入渲染核心代码库 -->
+    <script crossorigin src="./libs/react-dom.js"></script>
+    <!-- 3.引入将jsx转换成react代码的工具库 -->
+    <script src="./libs/babel.js"></script>
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        thead tr th {
+            border: 1px solid black;
+            padding: 10px 20px;
+            background-color: #ccc;
+        }
+
+        tbody tr td {
+            border: 1px solid black;
+            padding: 5px 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    books: [
+                        {
+                            id: 1,
+                            name: '《数据结构》',
+                            date: '2023-2',
+                            price: 56.00,
+                            count: 3
+                        },
+                        {
+                            id: 2,
+                            name: '《你不知道的js》',
+                            date: '2003-2',
+                            price: 66.00,
+                            count: 1
+                        },
+                        {
+                            id: 3,
+                            name: '《进击的巨人》',
+                            date: '2013-2',
+                            price: 88.00,
+                            count: 1
+                        },
+                    ],
+                }
+            }
+
+            //点击加号或减号，加号传1减号传-1
+            changeCount(index, count) {
+                //1.对原来的数组进行浅拷贝（内部元素地址还是指向原来）
+                const newBooks = [...this.state.books];
+                //2.修改浅拷贝后的里面的值
+                newBooks[index].count += count;
+                //3.此时我们输出books会发现boosk里面对应的值也变了
+                console.log(this.state.books[index].count);
+                //4.最后调用setState执行render函数更新视图，把newBooks给它（React官方推荐做法）
+                this.setState({
+                    books: newBooks,
+                })
+            }
+
+            //删除某行数据
+            deleteOne(index) {
+                console.log(index);
+                const newBooks = [...this.state.books];
+                newBooks.splice(index, 1);
+                //操作是一样的，不同的是这里删除不会对books产生影响，因为是浅拷贝
+                console.log(this.state.books);//删除某整个对象，books是不变的
+                this.setState({
+                    books: newBooks,
+                })
+            }
+
+            renderData() {
+                let {books} = this.state;
+                let totalPrice = 0;
+                books.forEach(book => {
+                    totalPrice += book.price * book.count;
+                });
+                return(
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>书籍名称</th>
+                                    <th>出版日期</th>
+                                    <th>价格</th>
+                                    <th>购买数量</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {books.map((book, index) => {
+                                    return (
+                                        <tr key={book.id}>
+                                            <td>{book.id}</td>
+                                            <td>{book.name}</td>
+                                            <td>{book.date}</td>
+                                            <td>{'$' + book.price}</td>
+                                            <td>
+                                                <button disabled={book.count == 1}
+                                                    onClick={() => this.changeCount(index, -1)}>-</button>
+                                                {book.count}
+                                                <button onClick={() => this.changeCount(index, 1)}>+</button>
+                                            </td>
+                                            <td><button onClick={() => this.deleteOne(index)}>移除</button></td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                        <h2>总价格：{'$' + totalPrice}</h2>
+                    </div>
+                )
+            }
+
+            renderNoData() {
+                return <h2>没有数据，去买点东西吧tmd</h2>
+            }
+            render() {
+                let { books } = this.state;
+                return books.length ? this.renderData() : this.renderNoData();
+            }
+        }
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
