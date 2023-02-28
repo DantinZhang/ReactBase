@@ -1,15 +1,15 @@
 import React from 'react';
-import Header from './Components/Header';
-import Main from './Components/Main'
-import Footer from './Components/Footer';
+import Son from './Components/Son'
 
 class App extends React.Component {
+    getData(data) {
+        console.log(data);
+    }
+
     render() {
         return (
             <div>
-                <Header/>
-                <Main/>
-                <Footer/>
+                <Son getSonData={(data) => this.getData(data)}/>
             </div>
         )
     }
