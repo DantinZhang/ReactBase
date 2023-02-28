@@ -1,15 +1,25 @@
 import React from 'react';
-import Son from './Components/Son'
+import Navigation from './Components/Navigation'
 
 class App extends React.Component {
-    getData(data) {
-        console.log(data);
+    constructor() {
+        super();
+        this.state = {
+            navList: ['新款', '精选', '流行'],
+            index: 0,
+        }
     }
-
+    getContent(index) {
+        this.setState({
+            index
+        })
+    }
     render() {
+        let { navList, index } = this.state;
         return (
             <div>
-                <Son getSonData={(data) => this.getData(data)}/>
+                <Navigation navList={navList} getContent={(index) => this.getContent(index)} />
+                <h2>{navList[index]}</h2>
             </div>
         )
     }
