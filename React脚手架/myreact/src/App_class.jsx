@@ -10,13 +10,14 @@ class App extends React.Component {
     }
 
     render() {
-        return (
+        return [
             <div>
                 <h2>奥里给</h2>
                 <button>按钮</button>
                 <HelloReact/>
-            </div>
-        )
+            </div>,
+            <div></div>
+        ]
     }
 }
 
