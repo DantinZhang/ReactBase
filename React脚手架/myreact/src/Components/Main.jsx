@@ -17,7 +17,8 @@ class Main extends Component {
       <div>
         <h2>Main</h2>
         <Banner banner={banner} />
-        <ProductList title="商品列表" productList={productList}/>
+        <ProductList age={18} title="商品列表" productList={productList}/>
+        <ProductList age={10}/>
       </div>
     )
   }
