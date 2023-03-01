@@ -1,33 +1,30 @@
-import React from 'react';
-import Navigation from './Components/Navigation'
-import './Components/Navigation/Navigation.scss'
+import React, { Component } from 'react'
+import Son from './Components/Son';
+import myContext from './context'
 
-class App extends React.Component {
+export class App extends Component {
     constructor() {
         super();
         this.state = {
-            index: 0,
+            person: { name: 'zzy', age: 18 }
         }
     }
-
     render() {
-        const left = <div className="left">左边</div>;
-        const middle = <div className="middle">中间</div>;
-        const right = <div className="right">右边</div>;
+        let { person } = this.state;
         return (
             <div>
-                {/* 1.第一种方式：通过props.children传react元素 */}
-                {/* <Navigation>
-                    <div className="left">左边</div>
-                    <div className="middle">中间</div>
-                    <div className="right">右边</div>
-                </Navigation> */}
+                {/* 1.第一种传递方式，繁琐 */}
+                {/* <Son name={person.name} age={person.age}/> */}
+                {/* 2.第二种传递方式：直接解构 */}
+                {/* <Son {...person}/> */}
 
-                {/* 2.第二种方式：直接通过props传react元素 */}
-                <Navigation left={left} middle={middle} right={right}/>
+                {/* 3.第三种传递方式：context */}
+                <myContext.Provider value={{name:'ht', age:'10'}}>
+                    <Son/>
+                </myContext.Provider>
             </div>
         )
     }
 }
 
-export default App;
+export default App
