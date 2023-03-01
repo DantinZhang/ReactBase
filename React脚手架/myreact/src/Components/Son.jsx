@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import GrandSon from './GrandSon';
-import myContext from '../context'
 
-export class Son extends Component {
+export class Son extends React.Component {
   render() {
-    console.log('Son',this.context);
     return (
       <div>
-        {/* 2.传过来的props也是一个对象，直接结构继续往下传 */}
-        <GrandSon {...this.props} />
+        <h1>Son组件</h1>
+        <GrandSon />
       </div>
+
     )
   }
 }
 
-Son.contextType = myContext;
 export default Son

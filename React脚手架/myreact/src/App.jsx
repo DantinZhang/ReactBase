@@ -1,27 +1,38 @@
-import React, { Component } from 'react'
+import React from 'react';
 import Son from './Components/Son';
-import myContext from './context'
+import eventBus from './utils/event-bus';
 
-export class App extends Component {
+export class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            person: { name: 'zzy', age: 18 }
+            name: '',
+            age: 0,
         }
     }
+    //事件的回调
+    getData(name,age) {
+        console.log(name,age,this);
+        this.setState({
+            name: name, age: age
+        })
+    }
+    //1.挂载完毕后绑定事件接收别的地方传过来的值
+    componentDidMount() {
+        eventBus.on('getData', this.getData.bind(this))
+    }
+    //3.销毁的时候解绑
+    componentWillUnmount() {
+        eventBus.off('getData', this.getData)
+    }
+
     render() {
-        let { person } = this.state;
+        let { name, age } = this.state;
         return (
             <div>
-                {/* 1.第一种传递方式，繁琐 */}
-                {/* <Son name={person.name} age={person.age}/> */}
-                {/* 2.第二种传递方式：直接解构 */}
-                {/* <Son {...person}/> */}
-
-                {/* 3.第三种传递方式：context */}
-                <myContext.Provider value={{name:'ht', age:'10'}}>
-                    <Son/>
-                </myContext.Provider>
+                <h1>{name}</h1>
+                <h2>{age}</h2>
+                <Son/>
             </div>
         )
     }
