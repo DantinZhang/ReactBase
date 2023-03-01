@@ -1,15 +1,13 @@
-// 安装scss：npm add node-sass@npm:dart-sass
-.nav {
-    border: 2px solid black;
+.box {
     display: flex;
     justify-content: space-around;
+}
 
-    .title {
-        padding: 10px;
+.left,
+.right {
+    background-color: skyblue;
+}
 
-        &.active {
-            color: red;
-            border-bottom: 3px solid red;
-        }
-    }
+.middle {
+    background-color: red;
 }

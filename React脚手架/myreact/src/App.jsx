@@ -1,25 +1,30 @@
 import React from 'react';
 import Navigation from './Components/Navigation'
+import './Components/Navigation/Navigation.scss'
 
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            navList: ['新款', '精选', '流行'],
             index: 0,
         }
     }
-    getContent(index) {
-        this.setState({
-            index
-        })
-    }
+
     render() {
-        let { navList, index } = this.state;
+        const left = <div className="left">左边</div>;
+        const middle = <div className="middle">中间</div>;
+        const right = <div className="right">右边</div>;
         return (
             <div>
-                <Navigation navList={navList} getContent={(index) => this.getContent(index)} />
-                <h2>{navList[index]}</h2>
+                {/* 1.第一种方式：通过props.children传react元素 */}
+                {/* <Navigation>
+                    <div className="left">左边</div>
+                    <div className="middle">中间</div>
+                    <div className="right">右边</div>
+                </Navigation> */}
+
+                {/* 2.第二种方式：直接通过props传react元素 */}
+                <Navigation left={left} middle={middle} right={right}/>
             </div>
         )
     }

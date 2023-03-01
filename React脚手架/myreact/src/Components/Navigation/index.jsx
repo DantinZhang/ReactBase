@@ -1,39 +1,22 @@
 import React, { Component } from 'react'
-import './Navigation.scss';
-export class Navigate extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentIndex: 0,
-    }
-  }
 
-  changeIndex(index) {
-    this.setState({
-      currentIndex: index
-    })
-    this.props.getContent(index);
-  }
 
+export class Navigation extends Component {
   render() {
-    let { currentIndex } = this.state;
-    let { navList } = this.props
+    //props中的children可以接收到子组件插槽中的react元素
+    let {children,left,middle,right} = this.props;
+    console.log(children)
     return (
-      <div className='nav'>
-        {navList.map((nav, index) => {
-          return (
-            <div
-              key={nav}
-              className={`title ${currentIndex === index ? 'active' : ''}`}
-              onClick={() => this.changeIndex(index)}
-            >
-              {nav}
-            </div>
-          )
-        })}
+      <div  className='box'>
+        {/* <div>{children[0]}</div>
+        <div>{children[1]}</div>
+        <div>{children[2]}</div> */}
+        {left}
+        {right}
+        {middle}
       </div>
     )
   }
 }
 
-export default Navigate
+export default Navigation
