@@ -1,6 +1,27 @@
-import React,{createRef} from 'react';
+import {createRef, PureComponent ,forwardRef} from 'react';
 
-export class App extends React.PureComponent {
+// class Son extends PureComponent {
+//     sayHi() {
+//         console.log('Hi,I am son');
+//     }
+//     render() {
+//         return (
+//             <div>
+//                 <h1>Son组件</h1>
+//             </div>
+//         )
+//     }
+// }
+
+const Son = forwardRef(function(props, ref) {
+    return (
+        <div>
+            <h1 ref={ref}>我是函数儿子</h1>
+        </div>
+    )
+})
+
+export class App extends PureComponent {
     constructor() {
         super();
         this.state = {
@@ -8,32 +29,21 @@ export class App extends React.PureComponent {
             age: 18,
         }
 
-        this.myRef = createRef(); //第二种
-        this.getRef = null;//第三种
+        this.myRef = createRef(); //第1步.创建ref对象
     }
 
     getDOM() {
-        //1.第一种：标签绑定ref属性，通过this.refs.属性名拿到
-        console.log(this.refs.title);
-        //2.第二种：提前创建ref对象，createRef()，把创建好的对象绑定到元素上
+        //第3步.通过this.myRef.current拿到当前东西
         console.log(this.myRef.current);//current以最后一个为主
-        //3.第三种：通过函数拿到
-        console.log(this.getRef);
+        // this.myRef.current.sayHi(); //拿到子组件并调用其中的方法Hi,I am son
     }
 
     render() {
-        console.log('App的render执行')
         return (
             <div>
-                {/* 1.第一种 */}
-                <h1 ref='title'>h1标题</h1>
-                {/* 2.第二种 */}
-                <h2 ref={this.myRef}>h2标题</h2>
-                <h3 ref={this.myRef}>h3标题</h3>
-                {/* 3.第三种 */}
-                <h4 ref={(el) => {this.getRef = el}}>h4标题</h4>
-                
-                <button onClick={() => this.getDOM()}>点击获取DOM</button>
+                {/* 第2步：把创建的对象给ref属性 */}
+                <Son ref={this.myRef}/>
+                <button onClick={() => this.getDOM()}>点击获取组件</button>
             </div>
         )
     }
