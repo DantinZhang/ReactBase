@@ -44,7 +44,7 @@ export class Son extends React.Component {
     //一大坨代码，要执行一年
   }
   render() {
-    console.log('render执行')
+    console.log('render执行',this.state.age)
     return (
       <div>
         <h1>{this.state.name}</h1>
