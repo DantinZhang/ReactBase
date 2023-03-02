@@ -6,21 +6,24 @@ export class App extends PureComponent {
         this.state = {
             userName: '',
             password: 0,
+            isAgree: false,
         }
     }
 
     submitData() {
-        console.log('提交', this.state.userName, this.state.password)
+        console.log('提交', this.state.userName, this.state.password,this.state.isAgree)
     }
 
     changeInput(e) {
+        //如果拿单选框的数据，那么拿到的是布尔值checked
+        const value = e.target.type == 'checkbox' ? e.target.checked : e.target.value;
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: value
         })
     }
 
     render() {
-        let { userName, password } = this.state;
+        let { userName, password,isAgree } = this.state;
         return (
             <div>
                 <form action="">
@@ -42,6 +45,17 @@ export class App extends PureComponent {
                         value={password}
                         onChange={(e) => this.changeInput(e)}
                     />
+
+                    {/* 3.单选框 */}
+                    <input
+                        type="checkbox"
+                        name="isAgree"
+                        id="man"
+                        value="同意"
+                        checked={isAgree}
+                        onChange={(e) => this.changeInput(e)}
+                    />
+                    <label htmlFor="man">同意上述协议</label>
                 </form>
                 <button onClick={() => this.submitData()}>提交表单数据</button>
             </div>
