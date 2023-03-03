@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import appStyle from './App.module.css'
+import appStyle from './App.module.css';
+import './App.less';
 export class App extends PureComponent {
     constructor() {
         super();
@@ -24,7 +25,13 @@ export class App extends PureComponent {
 
                 {/* 2.CSS模块化*/}
                 <div className={appStyle.box}>
-                    <h1>嗷嗷嗷</h1>
+                    <h1>CSS模块化</h1>
+                </div>
+
+                {/* 3.less的使用 */}
+                <div className='head'>
+                    <h1 className='title'>less的使用</h1>
+                    <h1 className='nav'>导航栏</h1>
                 </div>
             </div>
         )
