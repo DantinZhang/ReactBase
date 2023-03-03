@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import enhanceContext from './enhanceContext';
+import loginAuth from './loginAuth';
 
 
 export class HOC extends PureComponent {
@@ -7,11 +7,10 @@ export class HOC extends PureComponent {
         return (
             <div>
                 <h2>子组件1：HOC</h2>
-                <h3>HOC拿到传过来的value：{this.props.name + this.props.age}</h3>
             </div>
         )
     }
 }
 
-const newHOC = enhanceContext(HOC);
+const newHOC = loginAuth(HOC);
 export default newHOC;
