@@ -19,6 +19,9 @@ const NiuBi = styled.div.attrs((props) => {
             &:hover {
                 background-color: blue;
             }
+            &.active {
+                color:red;
+            }
         }
 
         .content {
