@@ -15,4 +15,4 @@ unsubscribe();
 
 store.dispatch({ type: 'changeAge', age: 30 });
 
-// console.log(store.getState());
+console.log(store.getState());
