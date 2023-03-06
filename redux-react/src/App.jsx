@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import Home from './components/Home';
 import Son from './components/Son';
 import store from './store';
 import {change} from './store/actionCreators'
@@ -28,6 +29,7 @@ export class App extends PureComponent {
         let { counter } = this.state;
         return (
             <div>
+                <Home/>
                 <h1>App</h1>
                 <h2>{counter}</h2>
                 <button onClick={() => this.change(1)}>点击+1</button>

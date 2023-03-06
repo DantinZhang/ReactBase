@@ -1,3 +1,4 @@
 const CHANGECOUNTER = 'changeCounter';
 const SUBTRACT = 'subtract';
-export {CHANGECOUNTER, SUBTRACT};
+const REQNEWSLIST = 'reqNewsList';
+export { CHANGECOUNTER, SUBTRACT, REQNEWSLIST };

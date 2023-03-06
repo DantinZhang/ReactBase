@@ -1,4 +1,4 @@
-import {CHANGECOUNTER, SUBTRACT} from './constants'
+import {CHANGECOUNTER, SUBTRACT,REQNEWSLIST} from './constants'
 const change = (num) => {
     return {
         type: CHANGECOUNTER,
@@ -12,4 +12,11 @@ const subtract = (dj) => {
         dj
     }
 }
-export {change,subtract}
+
+const reqNewsList = (newsList) => {
+    return {
+        type: REQNEWSLIST,
+        newsList,
+    }
+}
+export {change,subtract,reqNewsList}
