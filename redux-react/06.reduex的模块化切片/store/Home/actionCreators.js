@@ -1,18 +1,5 @@
-import {CHANGECOUNTER, SUBTRACT,REQNEWSLIST} from './constants'
+import {REQNEWSLIST} from './constants'
 import axios from 'axios';
-const change = (num) => {
-    return {
-        type: CHANGECOUNTER,
-        num: num
-    }
-}
-
-const subtract = (dj) => {
-    return {
-        type: SUBTRACT,
-        dj
-    }
-}
 
 const reqNewsList = (newsList) => {
     return {
@@ -29,4 +16,4 @@ const reqNewsListFun = () => {
         })
     }
 }
-export {change,subtract,reqNewsListFun}
+export {reqNewsListFun}
