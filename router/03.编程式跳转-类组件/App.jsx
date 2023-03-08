@@ -31,12 +31,7 @@ export class App extends PureComponent {
           <h4>中间的路由内容：</h4>
           <Routes>
             <Route path='/' element={<Navigate to='/home' />} />
-            <Route path='/home' element={<Home />} >
-              <Route path='/home' element={<Navigate to='/home/column1' />}></Route>
-              <Route path='/home/column1' element={<Column1 />}></Route>
-              <Route path='/home/column2' element={<Column2 />}></Route>
-              <Route path='/home/column3' element={<Column3 />}></Route>
-            </Route>
+            <Route path='/home' element={<Home />} />
             <Route path='/detail' element={<Detail />} />
             <Route path='/login' element={<Login />} />
             <Route path='*' element={<NotFound />} />
