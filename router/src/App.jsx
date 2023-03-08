@@ -1,12 +1,6 @@
-import React, { PureComponent } from 'react';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Detail from './pages/Detail';
-import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
-import NotFound from './pages/NotFound';
-import Column1 from './pages/Column1';
-import Column2 from './pages/Column2';
-import Column3 from './pages/Column3';
+import React from 'react';
+import {Link, useNavigate, useRoutes } from 'react-router-dom';
+import routes from './router';
 
 function App() {
   let navigate = useNavigate();
@@ -30,7 +24,7 @@ function App() {
       </div>
       <div className="content">
         <h4>中间的路由内容：</h4>
-        <Routes>
+        {/* <Routes>
           <Route path='/' element={<Navigate to='/home' />} />
           <Route path='/home' element={<Home />} >
             <Route path='/home' element={<Navigate to='/home/column1' />}></Route>
@@ -41,7 +35,9 @@ function App() {
           <Route path='/detail/:id' element={<Detail />} />
           <Route path='/login' element={<Login />} />
           <Route path='*' element={<NotFound />} />
-        </Routes>
+        </Routes> */}
+
+        {useRoutes(routes)}
       </div>
       <div className="foorer">Footer</div>
     </div>
