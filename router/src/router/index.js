@@ -1,11 +1,15 @@
 import Home from '../pages/Home';
-import Login from '../pages/Login';
-import Detail from '../pages/Detail';
+// import Login from '../pages/Login';
+// import Detail from '../pages/Detail';
 import NotFound from '../pages/NotFound';
 import Column1 from '../pages/Column1';
 import Column2 from '../pages/Column2';
 import Column3 from '../pages/Column3';
 import { Navigate } from 'react-router-dom';
+import React from 'react';
+
+const Login = React.lazy(() => import('../pages/Login'));
+const Detail = React.lazy(() => import('../pages/Detail'));
 
 let routes = [
     {
