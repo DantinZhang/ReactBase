@@ -1,12 +1,9 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Detail from './pages/Detail';
 import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import NotFound from './pages/NotFound';
-import Column1 from './pages/Column1';
-import Column2 from './pages/Column2';
-import Column3 from './pages/Column3';
 
 function App() {
   let navigate = useNavigate();
@@ -30,12 +27,7 @@ function App() {
         <h4>中间的路由内容：</h4>
         <Routes>
           <Route path='/' element={<Navigate to='/home' />} />
-          <Route path='/home' element={<Home />} >
-            <Route path='/home' element={<Navigate to='/home/column1' />}></Route>
-            <Route path='/home/column1' element={<Column1 />}></Route>
-            <Route path='/home/column2' element={<Column2 />}></Route>
-            <Route path='/home/column3' element={<Column3 />}></Route>
-          </Route>
+          <Route path='/home' element={<Home />} />
           <Route path='/detail' element={<Detail />} />
           <Route path='/login' element={<Login />} />
           <Route path='*' element={<NotFound />} />

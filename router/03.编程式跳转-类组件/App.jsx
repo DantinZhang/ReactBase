@@ -4,9 +4,6 @@ import Login from './pages/Login';
 import Detail from './pages/Detail';
 import { Routes, Route, Link, Navigate, } from 'react-router-dom';
 import NotFound from './pages/NotFound';
-import Column1 from './pages/Column1';
-import Column2 from './pages/Column2';
-import Column3 from './pages/Column3';
 import enhanceUseNavigate from './utils/enhanceUseNavigate';
 
 export class App extends PureComponent {
