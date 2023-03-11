@@ -24,4 +24,13 @@ function useScrollY() {
     return [scrollY];
 }
 
-export { useUserToken, useScrollY }
+function useChangeLocalStorage(key) {
+    const [value, setValue] = useState(localStorage.getItem(key))
+
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value));
+    },[value])
+
+    return [value, setValue];
+}
+export { useUserToken, useScrollY, useChangeLocalStorage }
