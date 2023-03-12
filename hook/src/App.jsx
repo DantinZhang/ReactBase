@@ -24,7 +24,7 @@ const Son = memo(() => {
 })
 
 const App = memo(() => {
-  const state1 = useSelector((state) => {
+  const myState = useSelector((state) => {
     return {
       count: state.home.counter
     }
@@ -34,11 +34,11 @@ const App = memo(() => {
   function changeNum(num) {
     dispatch(addNumber(num))
   }
-  console.log('父组件渲染', state1.count)
+  console.log('父组件渲染', myState.count)
   return (
     <div>
       <h1>App</h1>
-      <h2>{state1.count}</h2>
+      <h2>{myState.count}</h2>
       <button onClick={e => changeNum(1)}>点击修改state中的counter</button>
       <Son />
     </div>
